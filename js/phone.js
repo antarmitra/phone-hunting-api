@@ -15,6 +15,18 @@ const displayPhones = phones => {
     // console.log(phones)
     const phoneContainer = document.getElementById('phone-container')
 
+    // show all button clickable
+    const showAllContainer = document.getElementById('show-all-container')
+    if( phones.length > 12){
+        showAllContainer.classList.remove('hidden')
+    }
+    else{
+        showAllContainer.classList.add('hidden')
+    }
+
+    // display show
+    phones = phones.slice(0, 12)
+
     // clear data
     phoneContainer.textContent = '';
 
