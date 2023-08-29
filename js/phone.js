@@ -2,7 +2,7 @@
 // .then(res => res.json())
 // .then(json => console.log(json))
 
-const loadPhone = async(searchText) => {
+const loadPhone = async (searchText) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
     const data = await res.json();
     const phones = data.data;
@@ -17,10 +17,10 @@ const displayPhones = phones => {
 
     // show all button clickable
     const showAllContainer = document.getElementById('show-all-container')
-    if( phones.length > 12){
+    if (phones.length > 12) {
         showAllContainer.classList.remove('hidden')
     }
-    else{
+    else {
         showAllContainer.classList.add('hidden')
     }
 
@@ -38,33 +38,50 @@ const displayPhones = phones => {
         phoneCard.classList = `card w-96 bg-gray-100 `;
 
         // set innerHTML
-        phoneCard.innerHTML = `<figure><img src="${phone.image}" alt="Shoes" /></figure>
+        phoneCard.innerHTML = `<figure><img class="mt-5" src="${phone.image}" alt="Shoes" /></figure>
         <div class="card-body">
-            <h2 class="card-title">${phone.phone_name
+            <h2 class="text-3xl text-center">${phone.phone_name
             }</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div class="card-actions justify-end">
+            <p class="text-lg text-center">Price: 1000$</p>
+            <div class="text-center">
                 <button class="btn btn-primary">Buy Now</button>
             </div>
         </div>`;
-        
+
         // append Child
         phoneContainer.appendChild(phoneCard)
+
+        // hide loading Spinner
+        toggleLoadingSpinner(false);
     })
 }
 
 // search bar and button clickable
 const buttonClick = () => {
+    toggleLoadingSpinner(true);
     const inputField = document.getElementById('input-field');
     const searchText = inputField.value;
     console.log(searchText)
     loadPhone(searchText)
 }
 
+// second search bar clickable
 const buttonClicked = () => {
+    toggleLoadingSpinner(true);
     const inputField = document.getElementById('input-field2')
     const searchText = inputField.value;
     loadPhone(searchText)
+}
+
+// loading spinner update
+const toggleLoadingSpinner = (isLoading) => {
+    const loadingSpinner = document.getElementById('loading-spinner')
+    if(isLoading){
+        loadingSpinner.classList.remove('hidden')
+    }
+    else{
+        loadingSpinner.classList.add('hidden')
+    }
 }
 
 // loadPhone()
