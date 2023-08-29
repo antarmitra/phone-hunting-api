@@ -15,26 +15,30 @@
     </header>
 
     <main class="container mx-auto mt-8">
-        <section class="bg-gray-100 p-4 m-4 rounded-lg">
+        <section class="bg-gray-100 p-4 m-4 rounded-lg text-center">
             <input id="input-field" type="text" placeholder="Search please"
                 class="input input-bordered w-full max-w-xs" />
             <button onclick="buttonClick()" class="btn btn-active btn-accent text-white">Search</button>
 
-            <input id="input-field2" type="text" placeholder="Search please"
+            <!-- <input id="input-field2" type="text" placeholder="Search please"
                 class="input input-bordered w-full max-w-xs" />
-            <button onclick="buttonClicked()" class="btn btn-error btn-accent text-white">Search</button>
+            <button onclick="buttonClicked()" class="btn btn-error btn-accent text-white">Search</button> -->
         </section>
 
 
         <section>
+            <!-- spinner or loader -->
             <div id="loading-spinner" class="text-center my-52 hidden">
                 <span class="loading loading-spinner text-primary"></span>
             </div>
+
+            <!-- phones div -->
             <div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4 m-4">
             </div>
 
+            <!-- show all button -->
             <div id="show-all-container" class="text-center hidden">
-                <button class="btn btn-outline btn-secondary">Show All</button>
+                <button onclick="showAll()" class="btn btn-outline btn-secondary">Show All</button>
             </div>
         </section>
     </main>

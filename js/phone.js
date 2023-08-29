@@ -2,30 +2,33 @@
 // .then(res => res.json())
 // .then(json => console.log(json))
 
-const loadPhone = async (searchText) => {
+const loadPhone = async (searchText, isShowAll) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
     const data = await res.json();
     const phones = data.data;
     // console.log(phones)
-    displayPhones(phones);
+    displayPhones(phones, isShowAll);
 }
 
 
-const displayPhones = phones => {
+const displayPhones = (phones, isShowAll) => {
     // console.log(phones)
     const phoneContainer = document.getElementById('phone-container')
 
     // show all button clickable
     const showAllContainer = document.getElementById('show-all-container')
-    if (phones.length > 12) {
+    if (phones.length > 12 && !isShowAll) {
         showAllContainer.classList.remove('hidden')
     }
     else {
         showAllContainer.classList.add('hidden')
     }
 
-    // display show
-    phones = phones.slice(0, 12)
+    console.log('is show all', isShowAll)
+    if(!isShowAll){
+        phones = phones.slice(0, 12)
+    }
+  
 
     // clear data
     phoneContainer.textContent = '';
@@ -57,21 +60,21 @@ const displayPhones = phones => {
 }
 
 // search bar and button clickable
-const buttonClick = () => {
+const buttonClick = (isShowAll) => {
     toggleLoadingSpinner(true);
     const inputField = document.getElementById('input-field');
     const searchText = inputField.value;
     console.log(searchText)
-    loadPhone(searchText)
+    loadPhone(searchText, isShowAll)
 }
 
-// second search bar clickable
-const buttonClicked = () => {
-    toggleLoadingSpinner(true);
-    const inputField = document.getElementById('input-field2')
-    const searchText = inputField.value;
-    loadPhone(searchText)
-}
+// // second search bar clickable
+// const buttonClicked = () => {
+//     toggleLoadingSpinner(true);
+//     const inputField = document.getElementById('input-field2')
+//     const searchText = inputField.value;
+//     loadPhone(searchText)
+// }
 
 // loading spinner update
 const toggleLoadingSpinner = (isLoading) => {
@@ -82,6 +85,11 @@ const toggleLoadingSpinner = (isLoading) => {
     else{
         loadingSpinner.classList.add('hidden')
     }
+}
+
+// show all button clickable
+const showAll = () => {
+    buttonClick(true)
 }
 
 // loadPhone()
